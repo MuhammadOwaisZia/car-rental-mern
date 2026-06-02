@@ -8,17 +8,18 @@ import ownerRouter from "./routes/ownerRoutes.js";
 const app = express();
 
 // Connect to Database
-await connectDB();
+connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => res.send("Server is running"));
-app.use("/api/user", userRouter)
-app.use("/api/owner", ownerRouter)
-
+app.use("/api/user", userRouter);
+app.use("/api/owner", ownerRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+export default app;
